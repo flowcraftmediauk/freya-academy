@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-beige: #F2E4D5;
+    --color-cream: #FAF7F2;
+    --color-white: #FFFFFF;
+    --color-dark: #171717;
+    --color-muted-brown: #806B55;
+    --color-soft-taupe: #B7A28B;
+    --color-light-gray: #F5F5F3;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--color-cream);
+    color: var(--color-dark);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Syne', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Subtle hexagonal decorative pattern */
+.bg-hex-pattern {
+  background-image: radial-gradient(rgba(183, 162, 139, 0.15) 1px, transparent 1px),
+                    radial-gradient(rgba(128, 107, 85, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.hex-wireframe {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}

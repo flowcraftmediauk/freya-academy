@@ -1,0 +1,7 @@
+{
+  "name": "Bespoke Practice - Client Portal",
+  "description": "An elegant, premium healthcare and wellness clinic website with appointment management and client administration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

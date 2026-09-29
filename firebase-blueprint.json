@@ -1,0 +1,223 @@
+{
+  "entities": {
+    "SiteConfig": {
+      "title": "SiteConfig",
+      "description": "Customizable client website configuration containing branding, hero, services, about, and contact details",
+      "type": "object",
+      "properties": {
+        "businessName": {
+          "type": "string",
+          "description": "Official business name of the client",
+          "maxLength": 120
+        },
+        "logoUrl": {
+          "type": "string",
+          "description": "URL to the client's official logo",
+          "maxLength": 500
+        },
+        "tagline": {
+          "type": "string",
+          "description": "Business tagline or subtitle",
+          "maxLength": 200
+        },
+        "businessDescription": {
+          "type": "string",
+          "description": "Executive description of the practice",
+          "maxLength": 2000
+        },
+        "heroHeadline": {
+          "type": "string",
+          "description": "Main headline for the hero banner",
+          "maxLength": 160
+        },
+        "heroSubheading": {
+          "type": "string",
+          "description": "Supporting description beneath the hero headline",
+          "maxLength": 500
+        },
+        "ctaText": {
+          "type": "string",
+          "description": "Label text for the primary call-to-action button",
+          "maxLength": 60
+        },
+        "heroImageUrl": {
+          "type": "string",
+          "description": "High resolution hero image URL",
+          "maxLength": 500
+        },
+        "aboutHeading": {
+          "type": "string",
+          "description": "Heading for the About section",
+          "maxLength": 160
+        },
+        "aboutDescription": {
+          "type": "string",
+          "description": "Detailed body text for the About section",
+          "maxLength": 2000
+        },
+        "aboutImageUrl": {
+          "type": "string",
+          "description": "Image URL for the About section",
+          "maxLength": 500
+        },
+        "email": {
+          "type": "string",
+          "description": "Official client contact email",
+          "maxLength": 120
+        },
+        "phone": {
+          "type": "string",
+          "description": "Official client contact phone number",
+          "maxLength": 50
+        },
+        "whatsapp": {
+          "type": "string",
+          "description": "Official client WhatsApp number",
+          "maxLength": 50
+        },
+        "whatsappUrl": {
+          "type": "string",
+          "description": "Direct WhatsApp chat URL",
+          "maxLength": 500
+        },
+        "facebookUrl": {
+          "type": "string",
+          "description": "Official Facebook profile URL",
+          "maxLength": 500
+        },
+        "instagramUrl": {
+          "type": "string",
+          "description": "Official Instagram profile URL",
+          "maxLength": 500
+        },
+        "address": {
+          "type": "string",
+          "description": "Practice physical location address",
+          "maxLength": 300
+        },
+        "openingHours": {
+          "type": "string",
+          "description": "Practice operating hours",
+          "maxLength": 200
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update",
+          "maxLength": 50
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "User ID of the updater",
+          "maxLength": 128
+        }
+      },
+      "required": ["updatedAt"]
+    },
+    "ServiceItem": {
+      "title": "ServiceItem",
+      "description": "Individual client clinical or wellness service item",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Name of the service",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the service",
+          "maxLength": 500
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to service visual",
+          "maxLength": 500
+        },
+        "ctaText": {
+          "type": "string",
+          "description": "Custom CTA text for this service",
+          "maxLength": 60
+        },
+        "order": {
+          "type": "number",
+          "description": "Display order index"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp",
+          "maxLength": 50
+        }
+      },
+      "required": ["title", "order"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Patient or client consultation booking request",
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "Full name of the patient or client",
+          "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address",
+          "maxLength": 120
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact telephone number",
+          "maxLength": 50
+        },
+        "preferredDate": {
+          "type": "string",
+          "description": "Requested appointment date",
+          "maxLength": 50
+        },
+        "service": {
+          "type": "string",
+          "description": "Selected service or area of consultation",
+          "maxLength": 100
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes or message",
+          "maxLength": 1000
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the appointment (pending, confirmed, completed, cancelled)",
+          "enum": ["pending", "confirmed", "completed", "cancelled"],
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Submission timestamp",
+          "maxLength": 50
+        }
+      },
+      "required": ["fullName", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/sites/{siteId}": {
+      "schema": {
+        "$ref": "#/entities/SiteConfig"
+      },
+      "description": "Main client site configuration and content settings"
+    },
+    "/sites/{siteId}/services/{serviceId}": {
+      "schema": {
+        "$ref": "#/entities/ServiceItem"
+      },
+      "description": "Client clinical and wellness services"
+    },
+    "/appointments/{appointmentId}": {
+      "schema": {
+        "$ref": "#/entities/Appointment"
+      },
+      "description": "Visitor consultation and appointment bookings"
+    }
+  }
+}
