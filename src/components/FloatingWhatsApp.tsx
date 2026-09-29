@@ -50,7 +50,5 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
         <span className="absolute -inset-1 rounded-full border-2 border-[#25D366] opacity-30 animate-ping pointer-events-none" />
       </a>
     </div>
-
-    <p>Deploy Test 1</p>
   );
 };
