@@ -2,6 +2,7 @@ import React from 'react';
 import { SiteConfig } from '../types';
 import { ArrowRight, Award, ShieldCheck, Stethoscope } from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
+import { resolveFounderImage, defaultFounderImg } from '../utils/imageUtils';
 
 interface AboutSectionProps {
   config: SiteConfig;
@@ -18,6 +19,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
     const el = document.getElementById('appointment');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const founderImageSrc = resolveFounderImage(config.aboutImageUrl);
 
   return (
     <section id="about" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#806B55]/15 relative overflow-hidden">
@@ -36,10 +39,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
               <div className="relative overflow-hidden bg-[#171717] shadow-lg border border-[#806B55]/20 aspect-[4/3]">
                 <img
-                  src={config.aboutImageUrl || '/src/assets/images/freya_academy_founder_1790703920911.jpg'}
+                  src={founderImageSrc}
                   alt={config.aboutHeading || 'Dra. Mónica Meneses'}
                   className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src !== defaultFounderImg) {
+                      target.src = defaultFounderImg;
+                    }
+                  }}
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />

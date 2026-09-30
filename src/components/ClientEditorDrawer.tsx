@@ -62,7 +62,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
   // New service state
   const [newServiceTitle, setNewServiceTitle] = useState('');
   const [newServiceDesc, setNewServiceDesc] = useState('');
-  const [newServiceImg, setNewServiceImg] = useState('/src/assets/images/clinic_wellness_treatment_1790703406165.jpg');
+  const [newServiceImg, setNewServiceImg] = useState('/images/clinic_wellness_treatment.jpg');
   const [newServiceCta, setNewServiceCta] = useState('Inquire Service');
 
   // Keep form data in sync when config updates

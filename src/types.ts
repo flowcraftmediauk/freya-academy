@@ -55,11 +55,11 @@ export const DEFAULT_EMPTY_SITE_CONFIG: SiteConfig = {
   heroSubheading:
     'Metodología práctica hands-on y mentoría directa diseñada exclusivamente para médicos que desean dominar protocolos avanzados y transformar su consulta profesional.',
   ctaText: 'Conoce Freya',
-  heroImageUrl: '/src/assets/images/freya_academy_hero_1790703932741.jpg',
+  heroImageUrl: '/images/freya_academy_hero.jpg',
   aboutHeading: 'Dra. Mónica Meneses',
   aboutDescription:
     'Fundadora & Directora Académica de Freya Academy.\n\nComprometida con la excelencia y la seguridad clínica, la Dra. Mónica Meneses lidera un programa de perfeccionamiento en Medicina Estética enfocado en destreza manual directa, análisis anatómico exhaustivo y aplicación rigurosa de técnicas de vanguardia.',
-  aboutImageUrl: '/src/assets/images/freya_academy_founder_1790703920911.jpg',
+  aboutImageUrl: '/images/freya_academy_founder.jpg',
   email: '',
   phone: '+591 62722266',
   whatsapp: '+591 62722266',

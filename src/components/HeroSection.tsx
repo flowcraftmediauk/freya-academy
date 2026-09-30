@@ -2,6 +2,7 @@ import React from 'react';
 import { SiteConfig } from '../types';
 import { ArrowRight, GraduationCap, BookOpen, Users, Phone, Sparkles } from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
+import { resolveFounderImage, defaultFounderImg } from '../utils/imageUtils';
 
 interface HeroSectionProps {
   config: SiteConfig;
@@ -23,6 +24,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const el = document.getElementById('about');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const founderImageSrc = resolveFounderImage(config.aboutImageUrl);
 
   return (
     <section id="hero" className="relative bg-[#FAF7F2] py-16 lg:py-24 overflow-hidden border-b border-[#806B55]/15">
@@ -139,10 +142,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Main Image Container */}
               <div className="relative overflow-hidden bg-[#171717] shadow-lg border border-[#806B55]/20 aspect-[4/3] lg:aspect-[4/3]">
                 <img
-                  src={config.aboutImageUrl || '/src/assets/images/freya_academy_founder_1790703920911.jpg'}
+                  src={founderImageSrc}
                   alt="Dra. Mónica Meneses — Fundadora & Directora Académica"
                   className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src !== defaultFounderImg) {
+                      target.src = defaultFounderImg;
+                    }
+                  }}
                 />
 
                 {/* Subtle scrim overlay */}

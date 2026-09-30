@@ -1,6 +1,7 @@
 import React from 'react';
 import { ServiceItem } from '../types';
 import { ArrowUpRight, Plus, Sparkles } from 'lucide-react';
+import { resolveServiceImage, defaultTreatmentImg } from '../utils/imageUtils';
 
 interface ServicesSectionProps {
   services: ServiceItem[];
@@ -62,10 +63,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <div className="relative aspect-[4/3] bg-[#F2E4D5] overflow-hidden border-b border-[#806B55]/15">
                     {service.imageUrl ? (
                       <img
-                        src={service.imageUrl}
+                        src={resolveServiceImage(service.imageUrl)}
                         alt={service.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          if (target.src !== defaultTreatmentImg) {
+                            target.src = defaultTreatmentImg;
+                          }
+                        }}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#FAF7F2] p-6 text-center text-xs text-[#806B55]/60 font-light">
