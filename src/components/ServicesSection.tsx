@@ -1,7 +1,7 @@
 import React from 'react';
 import { ServiceItem } from '../types';
 import { ArrowUpRight, Plus, Sparkles } from 'lucide-react';
-import { resolveServiceImage, defaultTreatmentImg } from '../utils/imageUtils';
+import { resolveServiceImage, embeddedTreatmentImage } from '../utils/imageUtils';
 
 interface ServicesSectionProps {
   services: ServiceItem[];
@@ -69,8 +69,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          if (target.src !== defaultTreatmentImg) {
-                            target.src = defaultTreatmentImg;
+                          if (target.src !== embeddedTreatmentImage) {
+                            target.src = embeddedTreatmentImage;
                           }
                         }}
                       />

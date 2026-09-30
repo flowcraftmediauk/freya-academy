@@ -2,7 +2,7 @@ import React from 'react';
 import { SiteConfig } from '../types';
 import { ArrowRight, Award, ShieldCheck, Stethoscope } from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
-import { resolveFounderImage, defaultFounderImg } from '../utils/imageUtils';
+import { resolveFounderImage, embeddedFounderImage } from '../utils/imageUtils';
 
 interface AboutSectionProps {
   config: SiteConfig;
@@ -45,8 +45,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src !== defaultFounderImg) {
-                      target.src = defaultFounderImg;
+                    if (target.src !== embeddedFounderImage) {
+                      target.src = embeddedFounderImage;
                     }
                   }}
                 />

@@ -2,7 +2,7 @@ import React from 'react';
 import { SiteConfig } from '../types';
 import { ArrowRight, GraduationCap, BookOpen, Users, Phone, Sparkles } from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
-import { resolveFounderImage, defaultFounderImg } from '../utils/imageUtils';
+import { resolveFounderImage, embeddedFounderImage } from '../utils/imageUtils';
 
 interface HeroSectionProps {
   config: SiteConfig;
@@ -148,8 +148,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src !== defaultFounderImg) {
-                      target.src = defaultFounderImg;
+                    if (target.src !== embeddedFounderImage) {
+                      target.src = embeddedFounderImage;
                     }
                   }}
                 />
