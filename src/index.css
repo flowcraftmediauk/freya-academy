@@ -25,6 +25,11 @@
     font-family: 'Syne', sans-serif;
     letter-spacing: -0.02em;
   }
+
+  .font-luxury {
+    font-family: 'Cormorant Garamond', Garamond, 'Didot', 'Bodoni MT', Georgia, serif;
+    letter-spacing: -0.015em;
+  }
 }
 
 /* Subtle hexagonal decorative pattern */
