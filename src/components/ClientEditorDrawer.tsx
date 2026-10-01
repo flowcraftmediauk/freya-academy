@@ -581,6 +581,19 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
 
                       <div className="space-y-1.5">
                         <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                          TikTok Profile URL
+                        </label>
+                        <input
+                          type="url"
+                          value={formData.tiktokUrl || ''}
+                          onChange={(e) => setFormData({ ...formData, tiktokUrl: e.target.value })}
+                          placeholder="https://www.tiktok.com/@freya.academia..."
+                          className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] transition-colors"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-semibold uppercase text-[#171717]/80">
                           Official Email
                         </label>
                         <input

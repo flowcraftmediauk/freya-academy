@@ -31,6 +31,7 @@ export interface SiteConfig {
   whatsappUrl?: string;
   facebookUrl?: string;
   instagramUrl?: string;
+  tiktokUrl?: string;
   address: string;
   openingHours: string;
   featuredCourse?: FeaturedCourseConfig;
@@ -241,6 +242,7 @@ export const DEFAULT_EMPTY_SITE_CONFIG: SiteConfig = {
     'https://api.whatsapp.com/send/?phone=59162722266&text=Somos%20FREYA%20ACADEMY%20%C2%BFquieres%20inscribirte%20al%20curso%3F',
   facebookUrl: 'https://www.facebook.com/freyaacademiabo',
   instagramUrl: 'https://www.instagram.com/freyaacademiabo',
+  tiktokUrl: 'https://www.tiktok.com/@freya.academia?_r=1&_t=ZS-9A3s4KR8RBk',
   address: 'Calle 10 de Calacoto, Edificio Vitruvio C10, Piso 12, La Paz, Bolivia',
   openingHours: 'Lunes a Viernes: 09:00 - 18:00',
   featuredCourse: DEFAULT_FEATURED_COURSE,

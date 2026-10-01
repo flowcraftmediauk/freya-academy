@@ -36,7 +36,7 @@ service cloud.firestore {
         'businessName', 'logoUrl', 'tagline', 'businessDescription',
         'heroHeadline', 'heroSubheading', 'ctaText', 'heroImageUrl',
         'aboutHeading', 'aboutDescription', 'aboutImageUrl',
-        'email', 'phone', 'whatsapp', 'whatsappUrl', 'facebookUrl', 'instagramUrl',
+        'email', 'phone', 'whatsapp', 'whatsappUrl', 'facebookUrl', 'instagramUrl', 'tiktokUrl',
         'address', 'openingHours', 'featuredCourse',
         'updatedAt', 'updatedBy'
       ]) &&
@@ -58,6 +58,7 @@ service cloud.firestore {
       (!('whatsappUrl' in data) || (data.whatsappUrl is string && data.whatsappUrl.size() <= 500)) &&
       (!('facebookUrl' in data) || (data.facebookUrl is string && data.facebookUrl.size() <= 500)) &&
       (!('instagramUrl' in data) || (data.instagramUrl is string && data.instagramUrl.size() <= 500)) &&
+      (!('tiktokUrl' in data) || (data.tiktokUrl is string && data.tiktokUrl.size() <= 500)) &&
       (!('address' in data) || (data.address is string && data.address.size() <= 300)) &&
       (!('openingHours' in data) || (data.openingHours is string && data.openingHours.size() <= 200)) &&
       (!('featuredCourse' in data) || (data.featuredCourse is map)) &&
