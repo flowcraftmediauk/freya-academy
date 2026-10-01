@@ -47,31 +47,38 @@ export const Header: React.FC<HeaderProps> = ({
           </a>
         </div>
 
-        {/* Zone 2: Navigation Links (Text with clean hover) */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide text-[#171717]/80">
+        {/* Zone 2: Navigation Links */}
+        <nav className="hidden md:flex items-center gap-7 text-sm font-medium tracking-wide text-[#171717]/85">
           <button
             onClick={() => scrollToSection('hero')}
             className="hover:text-[#806B55] transition-colors focus:outline-none"
           >
-            Overview
+            Inicio
+          </button>
+          <button
+            onClick={() => scrollToSection('proximos-cursos')}
+            className="hover:text-[#806B55] transition-colors focus:outline-none flex items-center gap-1.5 font-semibold text-[#806B55]"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#9E6370] animate-pulse" />
+            <span>Próximos Cursos</span>
           </button>
           <button
             onClick={() => scrollToSection('services')}
             className="hover:text-[#806B55] transition-colors focus:outline-none"
           >
-            Services
+            Programas
           </button>
           <button
             onClick={() => scrollToSection('about')}
             className="hover:text-[#806B55] transition-colors focus:outline-none"
           >
-            About Practice
+            Dra. Mónica Meneses
           </button>
           <button
             onClick={() => scrollToSection('appointment')}
             className="hover:text-[#806B55] transition-colors focus:outline-none"
           >
-            Consultation
+            Admisiones
           </button>
         </nav>
 
@@ -152,25 +159,32 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => scrollToSection('hero')}
               className="text-left py-2 hover:text-[#806B55] transition-colors"
             >
-              Overview
+              Inicio
+            </button>
+            <button
+              onClick={() => scrollToSection('proximos-cursos')}
+              className="text-left py-2 text-[#806B55] font-semibold flex items-center gap-2"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#9E6370]" />
+              <span>Próximos Cursos</span>
             </button>
             <button
               onClick={() => scrollToSection('services')}
               className="text-left py-2 hover:text-[#806B55] transition-colors"
             >
-              Services
+              Programas Oficiales
             </button>
             <button
               onClick={() => scrollToSection('about')}
               className="text-left py-2 hover:text-[#806B55] transition-colors"
             >
-              About Practice
+              Dra. Mónica Meneses
             </button>
             <button
               onClick={() => scrollToSection('appointment')}
               className="text-left py-2 hover:text-[#806B55] transition-colors"
             >
-              Consultation
+              Admisiones & Cupos
             </button>
           </nav>
 

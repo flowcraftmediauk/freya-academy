@@ -16,9 +16,10 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import { auth, db, loginWithGoogle, logoutUser, handleFirestoreError, OperationType } from './firebase';
-import { SiteConfig, ServiceItem, Appointment, DEFAULT_EMPTY_SITE_CONFIG } from './types';
+import { SiteConfig, ServiceItem, Appointment, DEFAULT_EMPTY_SITE_CONFIG, DEFAULT_FREYA_COURSES, DEFAULT_FEATURED_COURSE } from './types';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
+import { UpcomingCoursesSection } from './components/UpcomingCoursesSection';
 import { ServicesSection } from './components/ServicesSection';
 import { AboutSection } from './components/AboutSection';
 import { AppointmentSection } from './components/AppointmentSection';
@@ -32,6 +33,7 @@ export default function App() {
   const [config, setConfig] = useState<SiteConfig>(DEFAULT_EMPTY_SITE_CONFIG);
   const [services, setServices] = useState<ServiceItem[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [selectedCourseTitle, setSelectedCourseTitle] = useState<string>('');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -57,6 +59,9 @@ export default function App() {
           setConfig({
             ...DEFAULT_EMPTY_SITE_CONFIG,
             ...data,
+            email: data.email?.trim() || 'freyacademia@gmail.com',
+            address: data.address?.trim() || 'Calle 10 de Calacoto, Edificio Vitruvio C10, Piso 12, La Paz, Bolivia',
+            featuredCourse: data.featuredCourse || DEFAULT_FEATURED_COURSE,
           });
         }
       },
@@ -201,10 +206,20 @@ export default function App() {
           isEditMode={isEditMode}
         />
 
-        <ServicesSection
-          services={services}
+        {/* Dynamic Upcoming Course Highlight Module */}
+        <UpcomingCoursesSection
+          config={config}
           onOpenEditor={() => setIsEditorOpen(true)}
           isEditMode={isEditMode}
+          onSelectCourse={(courseTitle) => setSelectedCourseTitle(courseTitle)}
+        />
+
+        {/* 10 Official Programs Catalog */}
+        <ServicesSection
+          services={services.length > 0 ? services : DEFAULT_FREYA_COURSES}
+          onOpenEditor={() => setIsEditorOpen(true)}
+          isEditMode={isEditMode}
+          onSelectCourse={(courseTitle) => setSelectedCourseTitle(courseTitle)}
         />
 
         <AboutSection
@@ -215,7 +230,8 @@ export default function App() {
 
         <AppointmentSection
           config={config}
-          services={services}
+          services={services.length > 0 ? services : DEFAULT_FREYA_COURSES}
+          selectedCourseTitle={selectedCourseTitle}
         />
       </main>
 

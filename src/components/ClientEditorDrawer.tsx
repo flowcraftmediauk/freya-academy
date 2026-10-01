@@ -54,7 +54,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
   onLogout,
   isSaving,
 }) => {
-  const [activeTab, setActiveTab] = useState<'info' | 'services' | 'appointments'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'upcoming' | 'services' | 'appointments'>('info');
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<SiteConfig>(config);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -166,6 +166,19 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
             Client Information
           </button>
           <button
+            onClick={() => setActiveTab('upcoming')}
+            className={`py-3.5 border-b-2 transition-colors flex items-center gap-1.5 ${
+              activeTab === 'upcoming'
+                ? 'border-[#806B55] text-[#806B55]'
+                : 'border-transparent text-[#171717]/60 hover:text-[#171717]'
+            }`}
+          >
+            <span>Próximo Curso</span>
+            <span className="bg-[#9E6370] text-white px-1.5 py-0.5 rounded text-[9px] font-bold">
+              Destacado
+            </span>
+          </button>
+          <button
             onClick={() => setActiveTab('services')}
             className={`py-3.5 border-b-2 transition-colors flex items-center gap-1.5 ${
               activeTab === 'services'
@@ -173,9 +186,9 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                 : 'border-transparent text-[#171717]/60 hover:text-[#171717]'
             }`}
           >
-            <span>Services</span>
+            <span>Cursos / Servicios</span>
             <span className="bg-[#806B55]/10 text-[#806B55] px-1.5 py-0.5 rounded text-[10px]">
-              {services.length}
+              {services.length || 10}
             </span>
           </button>
           <button
@@ -587,7 +600,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                           type="text"
                           value={formData.address}
                           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                          placeholder="Santa Cruz, Bolivia"
+                          placeholder="Calle 10 de Calacoto, Edificio Vitruvio C10, Piso 12, La Paz, Bolivia"
                           className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] transition-colors"
                         />
                       </div>
@@ -637,6 +650,253 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                   </button>
                 </div>
               </form>
+            </div>
+          )}
+
+          {/* TAB: UPCOMING COURSE (PRÓXIMO CURSO) */}
+          {activeTab === 'upcoming' && (
+            <div className="space-y-6">
+              <div className="bg-white p-6 border border-[#806B55]/20 space-y-5">
+                <div>
+                  <h3 className="font-display text-base font-semibold text-[#171717]">
+                    Gestión del Próximo Curso Destacado
+                  </h3>
+                  <p className="text-xs text-[#171717]/60 font-light mt-1">
+                    Publica y actualiza la convocatoria del nuevo curso que impartirá la Dra. Mónica Meneses. Esta tarjeta aparece destacada en la página principal con botón directo a WhatsApp y reserva de cupos.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSave} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                      Título del Nuevo Curso <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.featuredCourse?.title || ''}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          featuredCourse: {
+                            ...(formData.featuredCourse || {
+                              badge: 'Próxima Convocatoria',
+                              title: '',
+                              subtitle: '',
+                              description: '',
+                              date: '',
+                              location: 'Santa Cruz, Bolivia',
+                              modality: 'Hands-On en Pacientes Reales',
+                              seatsTotal: 8,
+                              seatsLeft: 3,
+                              targetAudience: 'Médico estético, Médico dermatólogo, Cirujano plástico',
+                              syllabusHighlights: [],
+                              isOpen: true,
+                            }),
+                            title: e.target.value,
+                          },
+                        })
+                      }
+                      placeholder="e.g. Masterclass Avanzada: Armonización Facial & Bioestimuladores"
+                      className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                        Etiqueta / Badge
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.featuredCourse?.badge || ''}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            featuredCourse: {
+                              ...(formData.featuredCourse || ({} as any)),
+                              badge: e.target.value,
+                            },
+                          })
+                        }
+                        placeholder="Próxima Convocatoria • Cupos Limitados"
+                        className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                        Fecha Programada
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.featuredCourse?.date || ''}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            featuredCourse: {
+                              ...(formData.featuredCourse || ({} as any)),
+                              date: e.target.value,
+                            },
+                          })
+                        }
+                        placeholder="Próximamente • Fecha por Confirmar"
+                        className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                        Sede / Ciudad
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.featuredCourse?.location || ''}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            featuredCourse: {
+                              ...(formData.featuredCourse || ({} as any)),
+                              location: e.target.value,
+                            },
+                          })
+                        }
+                        placeholder="Sede Freya Academy • Santa Cruz, Bolivia"
+                        className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                        Modalidad
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.featuredCourse?.modality || ''}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            featuredCourse: {
+                              ...(formData.featuredCourse || ({} as any)),
+                              modality: e.target.value,
+                            },
+                          })
+                        }
+                        placeholder="100% Práctico con Pacientes Reales"
+                        className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                        Cupos Totales
+                      </label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={50}
+                        value={formData.featuredCourse?.seatsTotal || 8}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            featuredCourse: {
+                              ...(formData.featuredCourse || ({} as any)),
+                              seatsTotal: parseInt(e.target.value) || 8,
+                            },
+                          })
+                        }
+                        className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                        Cupos Disponibles
+                      </label>
+                      <input
+                        type="number"
+                        min={0}
+                        max={formData.featuredCourse?.seatsTotal || 8}
+                        value={formData.featuredCourse?.seatsLeft || 3}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            featuredCourse: {
+                              ...(formData.featuredCourse || ({} as any)),
+                              seatsLeft: parseInt(e.target.value) || 0,
+                            },
+                          })
+                        }
+                        className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                      Subtítulo o Enfoque
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.featuredCourse?.subtitle || ''}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          featuredCourse: {
+                            ...(formData.featuredCourse || ({} as any)),
+                            subtitle: e.target.value,
+                          },
+                        })
+                      }
+                      placeholder="Técnicas de inyección segura con microcánula y anatomía de alta precisión"
+                      className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold uppercase text-[#171717]/80">
+                      Descripción del Curso
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={formData.featuredCourse?.description || ''}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          featuredCourse: {
+                            ...(formData.featuredCourse || ({} as any)),
+                            description: e.target.value,
+                          },
+                        })
+                      }
+                      placeholder="Detalles sobre metodología, pacientes reales y mentoría..."
+                      className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between">
+                    {saveSuccess && (
+                      <span className="text-xs text-emerald-700 flex items-center gap-1.5 font-medium">
+                        <CheckCircle className="w-4 h-4" />
+                        <span>¡Próximo curso actualizado y publicado!</span>
+                      </span>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isSaving}
+                      className="ml-auto px-6 py-3 text-xs font-semibold uppercase tracking-wider bg-[#806B55] text-white hover:bg-[#6c5945] transition-all flex items-center gap-2 active:translate-y-0.5 disabled:opacity-60"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{isSaving ? 'Guardando...' : 'Publicar Anuncio de Curso'}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           )}
 
@@ -778,8 +1038,13 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                           <div className="text-xs text-[#806B55] flex flex-wrap gap-x-3 gap-y-1 mt-0.5">
                             {appt.email && <span>{appt.email}</span>}
                             {appt.phone && <span>{appt.phone}</span>}
-                            {appt.preferredDate && <span>Date: {appt.preferredDate}</span>}
+                            {appt.preferredDate && <span>Fecha: {appt.preferredDate}</span>}
                           </div>
+                          {appt.medicalSpecialty && (
+                            <div className="mt-1.5 inline-block bg-[#806B55]/10 text-[#806B55] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider border border-[#806B55]/20">
+                              Especialidad: {appt.medicalSpecialty}
+                            </div>
+                          )}
                         </div>
 
                         {/* Status selector */}

@@ -166,7 +166,15 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenEditor }) => {
               {config.address ? (
                 <div className="flex items-start gap-2">
                   <MapPin className="w-3.5 h-3.5 text-[#806B55] mt-0.5 shrink-0" />
-                  <span>{config.address}</span>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(config.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#806B55] transition-colors leading-relaxed"
+                    title="Ver ubicación en Google Maps"
+                  >
+                    {config.address}
+                  </a>
                 </div>
               ) : (
                 <div className="text-[11px] text-[#806B55]/70 italic">
