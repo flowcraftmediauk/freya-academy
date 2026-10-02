@@ -60,7 +60,9 @@ export default function App() {
             ...DEFAULT_EMPTY_SITE_CONFIG,
             ...data,
             email: data.email?.trim() || 'freyacademia@gmail.com',
-            address: data.address?.trim() || 'Calle 10 de Calacoto, Edificio Vitruvio C10, Piso 12, La Paz, Bolivia',
+            phone: data.phone?.trim() || '+591 69831697',
+            whatsapp: data.whatsapp?.trim() || '+591 69831697',
+            address: data.address?.trim() || 'Edificio Vitruvio II, Piso 3, N° 7979, Calacoto, La Paz, Bolivia',
             tiktokUrl: data.tiktokUrl || 'https://www.tiktok.com/@freya.academia?_r=1&_t=ZS-9A3s4KR8RBk',
             featuredCourse: data.featuredCourse || DEFAULT_FEATURED_COURSE,
           });

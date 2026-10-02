@@ -7,8 +7,8 @@ interface FloatingWhatsAppProps {
 }
 
 export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
-  whatsappUrl = 'https://api.whatsapp.com/send/?phone=59162722266&text=Somos%20FREYA%20ACADEMY%20%C2%BFquieres%20inscribirte%20al%20curso%3F',
-  phone = '+591 62722266',
+  whatsappUrl = 'https://api.whatsapp.com/send/?phone=59169831697&text=Hola%20Freya%20Academy%2C%20deseo%20inscribirme%20al%20curso',
+  phone = '+591 69831697',
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 

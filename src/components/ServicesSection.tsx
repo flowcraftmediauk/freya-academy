@@ -21,49 +21,19 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   // Use provided services from Firestore or fallback to the official 10 Freya courses
   const displayCourses = services && services.length > 0 ? services : DEFAULT_FREYA_COURSES;
 
+  // Dynamic categories based on active courses so it scales as doctor adds more
+  const uniqueCategories = Array.from(
+    new Set(displayCourses.map((c) => c.category).filter(Boolean))
+  ) as string[];
+
   const categories = [
-    { id: 'all', label: 'Todos los Cursos' },
-    { id: 'faciales', label: 'Facial & Inyectables' },
-    { id: 'avanzados', label: 'Procedimientos Clínicos' },
-    { id: 'especiales', label: 'Estética Regenerativa & Láser' },
+    { id: 'all', label: `Todos los Cursos (${displayCourses.length})` },
+    ...uniqueCategories.map((cat) => ({ id: cat, label: cat })),
   ];
 
   const filteredCourses = displayCourses.filter((course) => {
     if (selectedCategory === 'all') return true;
-    const title = course.title.toLowerCase();
-    const cat = (course.category || '').toLowerCase();
-    
-    if (selectedCategory === 'faciales') {
-      return (
-        title.includes('toxina') ||
-        title.includes('armonización') ||
-        title.includes('ácido') ||
-        title.includes('bioestimuladores') ||
-        cat.includes('facial') ||
-        cat.includes('inyectables') ||
-        cat.includes('rellenos')
-      );
-    }
-    if (selectedCategory === 'avanzados') {
-      return (
-        title.includes('subscisión') ||
-        title.includes('bloqueo') ||
-        title.includes('miembro') ||
-        title.includes('vaginal') ||
-        cat.includes('quirúrgicos') ||
-        cat.includes('urogenital') ||
-        cat.includes('ginecología')
-      );
-    }
-    if (selectedCategory === 'especiales') {
-      return (
-        title.includes('láser') ||
-        title.includes('regenerativa') ||
-        cat.includes('láser') ||
-        cat.includes('biológicas')
-      );
-    }
-    return true;
+    return course.category === selectedCategory;
   });
 
   const handleEnrollCourse = (courseTitle: string) => {
@@ -125,10 +95,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           ))}
         </div>
 
-        {/* Content Grid: 10 Official Freya Academy Courses */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Content Grid: Active Freya Academy Courses */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredCourses.map((service, idx) => {
-            const courseInquiryWhatsapp = `https://api.whatsapp.com/send/?phone=59162722266&text=${encodeURIComponent(
+            const courseInquiryWhatsapp = `https://api.whatsapp.com/send/?phone=59169831697&text=${encodeURIComponent(
               `Hola Freya Academy, deseo consultar información, temario y requisitos para el curso de: "${service.title}".`
             )}`;
 

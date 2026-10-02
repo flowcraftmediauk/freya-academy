@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import { SiteConfig } from '../types';
 import { User } from 'firebase/auth';
-import { Menu, X, Shield, LogIn, LogOut, SlidersHorizontal } from 'lucide-react';
+import {
+  Menu,
+  X,
+  LogIn,
+  LogOut,
+  SlidersHorizontal,
+  MapPin,
+  Phone,
+  Mail,
+  Instagram,
+  Facebook,
+  Music2,
+  MessageCircle,
+} from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
 
 interface HeaderProps {
@@ -33,8 +46,95 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const whatsappPhone = config.whatsapp || '+591 69831697';
+  const cleanPhone = whatsappPhone.replace(/[^0-9]/g, '');
+  const whatsappUrl = `https://api.whatsapp.com/send/?phone=${cleanPhone || '59169831697'}&text=${encodeURIComponent(
+    'Hola Freya Academy, deseo información sobre los cursos médicos.'
+  )}`;
+
   return (
     <header className="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#806B55]/15 transition-all">
+      {/* 
+        Top Utility & Social Bar:
+        Ensures all visitors immediately see the Academy's location, phone, and official social networks upon entry.
+      */}
+      <div className="bg-[#171717] text-[#FAF7F2] text-[11px] py-1.5 px-6 lg:px-12 border-b border-[#806B55]/30">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          {/* Location & Quick Contact */}
+          <div className="flex items-center gap-3 sm:gap-5 text-neutral-300 truncate">
+            <span className="flex items-center gap-1.5 truncate">
+              <MapPin className="w-3.5 h-3.5 text-[#E4A9B4] shrink-0" />
+              <span className="truncate font-light">
+                {config.address || 'Edificio Vitruvio II, Piso 3, N° 7979, Calacoto, La Paz, Bolivia'}
+              </span>
+            </span>
+            <span className="hidden md:inline text-neutral-600">•</span>
+            <a
+              href={`mailto:${config.email || 'freyacademia@gmail.com'}`}
+              className="hidden lg:flex items-center gap-1.5 hover:text-white transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#E4A9B4]" />
+              <span>{config.email || 'freyacademia@gmail.com'}</span>
+            </a>
+          </div>
+
+          {/* Social Media Links & Direct WhatsApp */}
+          <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
+            <span className="hidden sm:inline text-neutral-400 text-[10px] uppercase tracking-wider font-semibold">
+              Redes:
+            </span>
+
+            {/* Instagram */}
+            <a
+              href={config.instagramUrl || 'https://www.instagram.com/freyaacademiabo'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-neutral-300 hover:text-[#E4A9B4] transition-colors p-1"
+              title="Instagram @freyaacademiabo"
+            >
+              <Instagram className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline text-[10px]">Instagram</span>
+            </a>
+
+            {/* TikTok */}
+            <a
+              href={config.tiktokUrl || 'https://www.tiktok.com/@freya.academia?_r=1&_t=ZS-9A3s4KR8RBk'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-neutral-300 hover:text-[#E4A9B4] transition-colors p-1"
+              title="TikTok @freya.academia"
+            >
+              <Music2 className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline text-[10px]">TikTok</span>
+            </a>
+
+            {/* Facebook */}
+            <a
+              href={config.facebookUrl || 'https://www.facebook.com/freyaacademiabo'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-neutral-300 hover:text-[#E4A9B4] transition-colors p-1"
+              title="Facebook Freya Academy"
+            >
+              <Facebook className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline text-[10px]">Facebook</span>
+            </a>
+
+            {/* WhatsApp Direct Contact */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366]/25 transition-colors font-medium border border-[#25D366]/30"
+              title="WhatsApp: +591 69831697"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span className="text-[10px] tracking-wide font-mono">{config.phone || '+591 69831697'}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
         
         {/* Zone 1: Single text element Brand Zone */}
@@ -213,6 +313,42 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>Sign in with Google</span>
               </button>
             )}
+
+            {/* Mobile Social Links */}
+            <div className="pt-3 border-t border-[#806B55]/15 space-y-2">
+              <span className="text-[10px] uppercase tracking-wider font-semibold text-[#806B55] block">
+                Nuestras Redes Sociales:
+              </span>
+              <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                <a
+                  href={config.instagramUrl || 'https://www.instagram.com/freyaacademiabo'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-white border border-[#806B55]/20 flex flex-col items-center gap-1 hover:border-[#806B55]"
+                >
+                  <Instagram className="w-4 h-4 text-[#806B55]" />
+                  <span className="text-[10px]">Instagram</span>
+                </a>
+                <a
+                  href={config.tiktokUrl || 'https://www.tiktok.com/@freya.academia?_r=1&_t=ZS-9A3s4KR8RBk'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-white border border-[#806B55]/20 flex flex-col items-center gap-1 hover:border-[#806B55]"
+                >
+                  <Music2 className="w-4 h-4 text-[#806B55]" />
+                  <span className="text-[10px]">TikTok</span>
+                </a>
+                <a
+                  href={config.facebookUrl || 'https://www.facebook.com/freyaacademiabo'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-white border border-[#806B55]/20 flex flex-col items-center gap-1 hover:border-[#806B55]"
+                >
+                  <Facebook className="w-4 h-4 text-[#806B55]" />
+                  <span className="text-[10px]">Facebook</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       )}

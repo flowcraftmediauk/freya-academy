@@ -27,7 +27,7 @@ export const UpcomingCoursesSection: React.FC<UpcomingCoursesSectionProps> = ({
     description:
       'Programa intensivo teórico-práctico hands-on diseñado para médicos que buscan perfeccionar su criterio estético, optimizar vectores de tracción facial y dominar el abordaje de complicaciones clínicas.',
     date: 'Próximamente • Fecha por Confirmar',
-    location: 'Sede Freya Academy • Edificio Vitruvio C10, Piso 12, Calacoto, La Paz, Bolivia',
+    location: 'Sede Freya Academy • Edificio Vitruvio II, Piso 3, N° 7979, Calacoto, La Paz, Bolivia',
     modality: '100% Práctico con Pacientes Reales',
     seatsTotal: 8,
     seatsLeft: 3,
@@ -49,7 +49,7 @@ export const UpcomingCoursesSection: React.FC<UpcomingCoursesSectionProps> = ({
     }
   };
 
-  const whatsappInquiryUrl = `https://api.whatsapp.com/send/?phone=59162722266&text=${encodeURIComponent(
+  const whatsappInquiryUrl = `https://api.whatsapp.com/send/?phone=59169831697&text=${encodeURIComponent(
     `Hola Freya Academy, deseo información y postularme para el próximo curso: "${courseData.title}". ¿Cuáles son las fechas y cupos disponibles?`
   )}`;
 

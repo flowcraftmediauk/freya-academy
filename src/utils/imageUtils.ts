@@ -45,16 +45,9 @@ export function resolveFounderImage(url?: string): string {
 }
 
 /**
- * Resolves service card image to ensure it works 100% reliably in production builds.
+ * Resolves service card image to ensure it works reliably in production builds.
  */
 export function resolveServiceImage(url?: string): string {
   if (!url || typeof url !== 'string') return embeddedTreatmentImage;
-  if (
-    url.startsWith('/src/') ||
-    url.includes('clinic_wellness_treatment') ||
-    url.startsWith('/images/clinic_wellness_treatment')
-  ) {
-    return embeddedTreatmentImage;
-  }
   return url;
 }

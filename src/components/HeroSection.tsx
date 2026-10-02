@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { SiteConfig } from '../types';
-import { ArrowRight, GraduationCap, BookOpen, Users, CheckCircle, Send } from 'lucide-react';
+import {
+  ArrowRight,
+  GraduationCap,
+  BookOpen,
+  Users,
+  CheckCircle,
+  Send,
+  Instagram,
+  Facebook,
+  Music2,
+} from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
 
 interface HeroSectionProps {
@@ -18,7 +28,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     name: '',
     email: '',
     phone: '',
-    program: 'Armonización Facial & Inyectables',
+    program: 'Curación de Heridas',
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -37,7 +47,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     if (!quickForm.name.trim()) return;
     
     // Redirect with message to WhatsApp or appointment section
-    const phone = config.whatsapp || '+591 62722266';
+    const phone = config.whatsapp || '+591 69831697';
     const cleanPhone = phone.replace(/[^0-9]/g, '');
     const text = encodeURIComponent(
       `Hola Freya Academy, deseo postularme al programa de ${quickForm.program}. Mi nombre es Dr./Dra. ${quickForm.name}, Tel: ${quickForm.phone || 'No especificado'}, Email: ${quickForm.email || 'No especificado'}.`
@@ -103,18 +113,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-12 lg:pt-24 lg:pb-16 relative z-10">
         <div className="max-w-2xl lg:max-w-3xl space-y-7">
           
-          {/* Eyebrow Brand Badge */}
-          <div className="inline-flex items-center gap-3 px-3 py-1.5 bg-white/85 border border-[#806B55]/25 backdrop-blur-xs shadow-xs">
-            <FreyaLogo variant="symbol" className="h-6 w-5" />
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-[#806B55]">
-                {config.businessName || 'Freya Academy'}
-              </span>
-              <span className="text-[#806B55]/40">·</span>
-              <span className="text-[9px] uppercase tracking-[0.2em] font-mono text-[#806B55]/75">
-                {config.tagline || 'Formación Médica Real'}
-              </span>
-            </div>
+          {/* Eyebrow Brand Slogan */}
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-white/90 border border-[#806B55]/25 backdrop-blur-xs shadow-xs max-w-full">
+            <FreyaLogo variant="symbol" className="h-5 w-4 shrink-0" />
+            <span className="text-[11px] sm:text-xs font-serif italic text-[#806B55] tracking-wide">
+              {config.tagline || 'El conocimiento de hoy será tu poder del mañana'}
+            </span>
           </div>
 
           {/* Main Headline (Haute Couture / High-End Medical Editorial Typography) */}
@@ -182,6 +186,40 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               Postulación Académica
             </button>
           </div>
+
+          {/* Social Media Immediate Access Bar ("Que cuando entren puedan ver las redes sociales") */}
+          <div className="pt-1 flex flex-wrap items-center gap-2.5 text-xs">
+            <span className="text-[10px] uppercase tracking-wider font-semibold text-[#806B55]">
+              Redes Oficiales:
+            </span>
+            <a
+              href={config.instagramUrl || 'https://www.instagram.com/freyaacademiabo'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#806B55]/25 hover:border-[#806B55] text-[#171717] hover:text-[#806B55] transition-all shadow-2xs"
+            >
+              <Instagram className="w-3.5 h-3.5 text-[#806B55]" />
+              <span className="text-[11px] font-medium">Instagram</span>
+            </a>
+            <a
+              href={config.tiktokUrl || 'https://www.tiktok.com/@freya.academia?_r=1&_t=ZS-9A3s4KR8RBk'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#806B55]/25 hover:border-[#806B55] text-[#171717] hover:text-[#806B55] transition-all shadow-2xs"
+            >
+              <Music2 className="w-3.5 h-3.5 text-[#806B55]" />
+              <span className="text-[11px] font-medium">TikTok</span>
+            </a>
+            <a
+              href={config.facebookUrl || 'https://www.facebook.com/freyaacademiabo'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#806B55]/25 hover:border-[#806B55] text-[#171717] hover:text-[#806B55] transition-all shadow-2xs"
+            >
+              <Facebook className="w-3.5 h-3.5 text-[#806B55]" />
+              <span className="text-[11px] font-medium">Facebook</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -233,11 +271,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onChange={(e) => setQuickForm({ ...quickForm, program: e.target.value })}
                 className="px-3 py-2.5 text-xs bg-[#FAF7F2] border border-[#806B55]/30 focus:outline-none focus:border-[#806B55] transition-colors text-[#171717]"
               >
-                <option value="Armonización Facial & Inyectables">Armonización Facial</option>
-                <option value="Toxina Botulínica & Rellenos">Toxina Botulínica & Rellenos</option>
-                <option value="Bioestimuladores de Colágeno">Bioestimuladores</option>
-                <option value="Rinomodelación Avanzada">Rinomodelación</option>
-                <option value="Hilos Tensores & Lifting">Hilos Tensores</option>
+                <option value="Curación de Heridas">Curación de Heridas</option>
+                <option value="Plasma Rico en Plaquetas">Plasma Rico en Plaquetas (PRP)</option>
+                <option value="Ácido Hialurónico en Líneas Finas">Ácido Hialurónico en Líneas Finas</option>
+                <option value="Bloqueo Nervioso">Bloqueo Nervioso</option>
               </select>
             </div>
 

@@ -13,7 +13,7 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenEditor }) => {
 
   const whatsappHref =
     config.whatsappUrl ||
-    `https://api.whatsapp.com/send/?phone=59162722266&text=Somos%20FREYA%20ACADEMY%20%C2%BFquieres%20inscribirte%20al%20curso%3F`;
+    `https://api.whatsapp.com/send/?phone=59169831697&text=Hola%20Freya%20Academy%2C%20deseo%20inscribirme%20al%20curso`;
 
   return (
     <footer className="bg-[#FAF7F2] border-t border-[#806B55]/20 pt-16 pb-12">
@@ -166,7 +166,7 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenEditor }) => {
                   rel="noopener noreferrer"
                   className="font-medium text-[#171717] hover:text-[#25D366] transition-colors"
                 >
-                  {config.whatsapp || '+591 62722266'}
+                  {config.whatsapp || '+591 69831697'}
                 </a>
               </div>
 

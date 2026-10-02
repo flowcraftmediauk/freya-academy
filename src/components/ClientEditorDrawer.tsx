@@ -188,7 +188,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
           >
             <span>Cursos / Servicios</span>
             <span className="bg-[#806B55]/10 text-[#806B55] px-1.5 py-0.5 rounded text-[10px]">
-              {services.length || 10}
+              {services.length || 4}
             </span>
           </button>
           <button
@@ -535,7 +535,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                           type="tel"
                           value={formData.whatsapp}
                           onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                          placeholder="+591 62722266"
+                          placeholder="+591 69831697"
                           className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] transition-colors"
                         />
                       </div>
@@ -548,7 +548,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                           type="url"
                           value={formData.whatsappUrl || ''}
                           onChange={(e) => setFormData({ ...formData, whatsappUrl: e.target.value })}
-                          placeholder="https://api.whatsapp.com/send/?phone=59162722266..."
+                          placeholder="https://api.whatsapp.com/send/?phone=59169831697..."
                           className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] transition-colors"
                         />
                       </div>
@@ -600,7 +600,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="concierge@practice.com"
+                          placeholder="freyacademia@gmail.com"
                           className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] transition-colors"
                         />
                       </div>
@@ -613,7 +613,7 @@ export const ClientEditorDrawer: React.FC<ClientEditorDrawerProps> = ({
                           type="text"
                           value={formData.address}
                           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                          placeholder="Calle 10 de Calacoto, Edificio Vitruvio C10, Piso 12, La Paz, Bolivia"
+                          placeholder="Edificio Vitruvio II, Piso 3, N° 7979, Calacoto, La Paz, Bolivia"
                           className="w-full bg-[#FAF7F2] border border-[#806B55]/30 p-3 text-sm focus:outline-none focus:border-[#806B55] transition-colors"
                         />
                       </div>
