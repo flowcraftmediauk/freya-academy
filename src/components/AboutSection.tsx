@@ -37,7 +37,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               {/* Subtle back decorative frame */}
               <div className="absolute -inset-3 sm:-inset-4 border border-[#806B55]/20 -translate-x-2 -translate-y-2 pointer-events-none" />
 
-              <div className="relative overflow-hidden bg-[#171717] shadow-lg border border-[#806B55]/20 aspect-[4/3]">
+              <div className="relative overflow-hidden bg-[#171717] shadow-xl border border-[#806B55]/25 aspect-[3/4] max-w-md mx-auto">
                 <img
                   src={founderImageSrc}
                   alt={config.aboutHeading || 'Dra. Mónica Meneses'}
@@ -45,8 +45,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src !== embeddedFounderImage) {
-                      target.src = embeddedFounderImage;
+                    if (target.src !== '/images/dra_monica_meneses_real.jpg') {
+                      target.src = '/images/dra_monica_meneses_real.jpg';
                     }
                   }}
                 />

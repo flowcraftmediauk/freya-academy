@@ -64,7 +64,11 @@ export default function App() {
             whatsapp: data.whatsapp?.trim() || '+591 69831697',
             address: data.address?.trim() || 'Edificio Vitruvio II, Piso 3, N° 7979, Calacoto, La Paz, Bolivia',
             tiktokUrl: data.tiktokUrl || 'https://www.tiktok.com/@freya.academia?_r=1&_t=ZS-9A3s4KR8RBk',
-            featuredCourse: data.featuredCourse || DEFAULT_FEATURED_COURSE,
+            aboutImageUrl: '/images/dra_monica_meneses_real.jpg',
+            featuredCourse: {
+              ...DEFAULT_FEATURED_COURSE,
+              ...(data.featuredCourse || {}),
+            },
           });
         }
       },

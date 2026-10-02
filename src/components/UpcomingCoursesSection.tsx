@@ -123,11 +123,31 @@ export const UpcomingCoursesSection: React.FC<UpcomingCoursesSectionProps> = ({
                   {courseData.description}
                 </p>
 
-                {/* Syllabus Highlights */}
+                {/* Treatment Zones from Official Flyer */}
+                {courseData.treatmentZones && courseData.treatmentZones.length > 0 && (
+                  <div className="space-y-2.5 pt-1">
+                    <h4 className="text-xs uppercase font-bold tracking-wider text-[#806B55] flex items-center gap-1.5">
+                      <span>Zonas Anatómicas de Aplicación Clínica:</span>
+                    </h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {courseData.treatmentZones.map((zone, idx) => (
+                        <div
+                          key={idx}
+                          className="bg-[#FAF7F2] border border-[#806B55]/25 p-2 text-center text-xs font-semibold text-[#171717]"
+                        >
+                          <span className="text-[#9E6370] text-[10px] block font-mono font-bold">0{idx + 1}</span>
+                          <span className="leading-tight">{zone}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Syllabus Highlights from Official Flyer */}
                 {courseData.syllabusHighlights && courseData.syllabusHighlights.length > 0 && (
                   <div className="space-y-3 pt-2">
                     <h4 className="text-xs uppercase font-bold tracking-wider text-[#171717]">
-                      Puntos Clave del Programa:
+                      Lo Que Aprenderás en el Curso:
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {courseData.syllabusHighlights.map((highlight, idx) => (
@@ -139,17 +159,31 @@ export const UpcomingCoursesSection: React.FC<UpcomingCoursesSectionProps> = ({
                     </div>
                   </div>
                 )}
+
+                {/* Motivational Brand Quote from Flyer */}
+                <div className="pt-2 text-xs italic text-[#806B55] font-serif border-t border-[#806B55]/15 flex items-center justify-between">
+                  <span>"Belleza en cada detalle"</span>
+                  <span className="font-sans text-[11px] font-medium tracking-wide">Formación que transforma. Resultados que inspiran.</span>
+                </div>
               </div>
 
               {/* Right Column: Logistics, Seats & Direct Actions */}
               <div className="lg:col-span-5 bg-[#FAF7F2] border border-[#806B55]/20 p-6 sm:p-8 space-y-6">
-                <div className="border-b border-[#806B55]/20 pb-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#806B55] block">
-                    Ficha Técnica de Admisión
-                  </span>
-                  <p className="text-xs text-[#171717]/60 mt-0.5">
-                    Coordinado directamente por la Dra. Mónica Meneses.
-                  </p>
+                <div className="border-b border-[#806B55]/20 pb-4 flex items-center justify-between">
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#806B55] block">
+                      Ficha Técnica de Admisión
+                    </span>
+                    <p className="text-xs text-[#171717]/60 mt-0.5">
+                      Dirigido por la Dra. Mónica Meneses
+                    </p>
+                  </div>
+                  {courseData.investmentPrice && (
+                    <div className="text-right">
+                      <span className="text-[10px] uppercase font-bold text-[#806B55] block">Inversión</span>
+                      <span className="text-lg font-bold text-[#9E6370] font-mono">{courseData.investmentPrice}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Key Logistic Items */}
@@ -157,8 +191,10 @@ export const UpcomingCoursesSection: React.FC<UpcomingCoursesSectionProps> = ({
                   <div className="flex items-center gap-3">
                     <Calendar className="w-4 h-4 text-[#806B55] shrink-0" />
                     <div>
-                      <span className="text-[#171717]/60 block text-[10px] uppercase font-semibold">Fecha Prevista</span>
-                      <span className="font-semibold text-sm text-[#171717]">{courseData.date}</span>
+                      <span className="text-[#171717]/60 block text-[10px] uppercase font-semibold">Fecha & Horario</span>
+                      <span className="font-semibold text-sm text-[#171717]">
+                        {courseData.date} {courseData.time ? `• ${courseData.time}` : ''}
+                      </span>
                     </div>
                   </div>
 

@@ -4,12 +4,15 @@ export interface FeaturedCourseConfig {
   subtitle: string;
   description: string;
   date: string;
+  time?: string;
   location: string;
   modality: string;
   seatsTotal: number;
   seatsLeft: number;
   targetAudience: string;
+  investmentPrice?: string;
   syllabusHighlights: string[];
+  treatmentZones?: string[];
   isOpen: boolean;
 }
 
@@ -66,22 +69,32 @@ export interface Appointment {
 }
 
 export const DEFAULT_FEATURED_COURSE: FeaturedCourseConfig = {
-  badge: 'Próxima Convocatoria • Cupos Limitados',
-  title: 'Masterclass Avanzada: Armonización Facial & Bioestimuladores',
-  subtitle: 'Técnicas de inyección segura con microcánula y anatomía de alta precisión',
+  badge: 'Curso Presencial • Cupos Limitados (8 Cupos)',
+  title: 'Ácido Hialurónico para Líneas Finas',
+  subtitle: 'Naturalidad que realza cada expresión — Técnicas avanzadas para un rejuvenecimiento sutil, preciso y seguro',
   description:
-    'Programa intensivo teórico-práctico hands-on diseñado para médicos que buscan perfeccionar su criterio estético, optimizar vectores de tracción facial y dominar el abordaje de complicaciones clínicas.',
-  date: 'Próximamente • Fecha por Confirmar',
-  location: 'Sede Freya Academy • Edificio Vitruvio II, Piso 3, N° 7979, Calacoto, La Paz, Bolivia',
-  modality: '100% Práctico con Pacientes Reales',
+    'Formación médica intensiva presencial con práctica en pacientes reales y supervisión personalizada. Desarrollada exclusivamente para médicos estéticos que buscan dominar la selección del producto ideal, técnicas de microinyección con cánula y aguja, y prevención y manejo de complicaciones clínicas.',
+  date: 'Jueves 22 de Octubre',
+  time: '16:00 a 20:00 (4 Horas Intensivas)',
+  location: 'Calle 9 de Calacoto y Av. Sanchez Bustamante, Edificio Vitruvio II, piso 3 N° 7979, La Paz, Bolivia',
+  modality: 'Práctica en Pacientes Reales con Supervisión Personalizada',
   seatsTotal: 8,
   seatsLeft: 3,
-  targetAudience: 'Médico estético, Médico dermatólogo, Cirujano plástico',
+  targetAudience: 'Dirigido exclusivamente a Médicos Estéticos',
+  investmentPrice: '590 Bs',
   syllabusHighlights: [
-    'Mapeo ecográfico y vascular preventivo de zonas de riesgo',
-    'Técnicas de anclaje cigomático y definición mandibular tridimensional',
-    'Protocolos combinados de Hidroxiapatita de Calcio + Ácido Hialurónico',
-    'Manejo de complicaciones y protocolos de reversión inmediata',
+    'Tipos de ácido hialurónico y selección del producto ideal',
+    'Anatomía y evaluación facial en detalle',
+    'Técnicas de microinyección (cánula y aguja)',
+    'Prevención y manejo de complicaciones',
+    'Práctica en pacientes reales con supervisión personalizada',
+    'Resultados naturales y armónicos',
+  ],
+  treatmentZones: [
+    'Arrugas patas de gallo',
+    'Arrugas frente',
+    'Arrugas código de barras',
+    'Comisuras',
   ],
   isOpen: true,
 };
@@ -118,12 +131,12 @@ export const DEFAULT_FREYA_COURSES: ServiceItem[] = [
     title: 'Ácido Hialurónico en Líneas Finas',
     category: 'Rellenos Dérmicos de Precisión',
     description:
-      'Técnicas de microinyección superficial y blancheado (blanching technique) con ácidos hialurónicos de baja reticulación. Corrección milimétrica de código de barras, líneas de marioneta incipientes, patas de gallo y arrugas de reposo sin efecto Tyndall.',
+      'Naturalidad que realza cada expresión. Técnicas avanzadas de microinyección (cánula y aguja) para un rejuvenecimiento sutil, preciso y seguro en patas de gallo, frente, código de barras y comisuras. Práctica en pacientes reales con supervisión personalizada.',
     imageUrl: '/images/course_acido_hialuronico.jpg',
     ctaText: 'Ver Temario & Cupos',
     order: 3,
-    modality: 'Hands-On en Pacientes Reales',
-    duration: 'Módulo de Microprecisión',
+    modality: 'Hands-On en Pacientes Reales (8 Cupos)',
+    duration: 'Jueves 22 Oct • 16:00 a 20:00 (590 Bs)',
     createdAt: new Date().toISOString(),
   },
   {

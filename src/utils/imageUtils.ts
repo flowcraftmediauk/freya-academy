@@ -29,19 +29,13 @@ export function resolveHeroImage(url?: string): string {
 
 /**
  * Resolves doctor/founder portrait to ensure it works 100% reliably in production builds
- * (Netlify, Vercel, Hostinger) without any 404 network errors.
+ * (Netlify, Vercel, Hostinger) with Dra. Mónica Meneses' real photo.
  */
 export function resolveFounderImage(url?: string): string {
-  if (!url || typeof url !== 'string') return embeddedFounderImage;
-  if (
-    url.startsWith('/src/') ||
-    url.includes('freya_academy_founder') ||
-    url.includes('clinic_consultation') ||
-    url.startsWith('/images/freya_academy_founder')
-  ) {
-    return embeddedFounderImage;
+  if (url && typeof url === 'string' && url.startsWith('http')) {
+    return url;
   }
-  return url;
+  return '/images/dra_monica_meneses_real.jpg';
 }
 
 /**
