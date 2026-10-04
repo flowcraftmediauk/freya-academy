@@ -45,8 +45,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src !== '/images/dra_monica_meneses_real.jpg') {
-                      target.src = '/images/dra_monica_meneses_real.jpg';
+                    if (target.src !== embeddedFounderImage) {
+                      target.src = embeddedFounderImage;
                     }
                   }}
                 />

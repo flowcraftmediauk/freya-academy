@@ -32,10 +32,10 @@ export function resolveHeroImage(url?: string): string {
  * (Netlify, Vercel, Hostinger) with Dra. Mónica Meneses' real photo.
  */
 export function resolveFounderImage(url?: string): string {
-  if (url && typeof url === 'string' && url.startsWith('http')) {
+  if (url && typeof url === 'string' && (url.startsWith('http') || url.startsWith('data:image/'))) {
     return url;
   }
-  return '/images/dra_monica_meneses_real.jpg';
+  return embeddedFounderImage;
 }
 
 /**
