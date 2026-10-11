@@ -26,7 +26,7 @@ import { AppointmentSection } from './components/AppointmentSection';
 import { Footer } from './components/Footer';
 import { ClientEditorDrawer } from './components/ClientEditorDrawer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { SlidersHorizontal, Eye, EyeOff } from 'lucide-react';
+import { SlidersHorizontal, Eye, EyeOff, Download } from 'lucide-react';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -35,7 +35,7 @@ export default function App() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [selectedCourseTitle, setSelectedCourseTitle] = useState<string>('');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(true);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [authReady, setAuthReady] = useState(false);
 
@@ -297,6 +297,18 @@ export default function App() {
           <SlidersHorizontal className="w-3.5 h-3.5" />
           <span>Practice Data</span>
         </button>
+
+        {import.meta.env.DEV && (
+          <a
+            href="/freya-academy-hostinger.zip"
+            download="freya-academy-hostinger.zip"
+            className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#9E6370] hover:bg-[#804A58] transition-colors flex items-center gap-1.5 shadow-sm"
+            title="Download Ready-to-Upload ZIP for Hostinger (public_html)"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Hostinger ZIP</span>
+          </a>
+        )}
       </div>
 
     </div>

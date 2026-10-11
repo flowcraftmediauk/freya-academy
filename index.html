@@ -17,6 +17,24 @@
   <body class="bg-[#FAF7F2] text-[#171717] antialiased selection:bg-[#F2E4D5] selection:text-[#171717]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Automatic fallback for Hostinger Git Deployment (when raw repo root is served without Vite build step)
+      (function () {
+        var isViteDev = !!document.querySelector('script[src*="@vite/client"]');
+        var hasRawTsx = !!document.querySelector('script[src="/src/main.tsx"]');
+        if (!isViteDev && hasRawTsx) {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '/assets/index.css';
+          document.head.appendChild(link);
+
+          var script = document.createElement('script');
+          script.type = 'module';
+          script.src = '/assets/app.js';
+          document.body.appendChild(script);
+        }
+      })();
+    </script>
   </body>
 </html>
 

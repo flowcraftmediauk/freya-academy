@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" fill="none">
+  <defs>
+    <linearGradient id="freyaRuneGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#E2AAB5" />
+      <stop offset="30%" stop-color="#C98897" />
+      <stop offset="65%" stop-color="#925060" />
+      <stop offset="100%" stop-color="#551F2C" />
+    </linearGradient>
+  </defs>
+  <g fill="url(#freyaRuneGrad)">
+    <!-- Main Vertical Spine -->
+    <rect x="32" y="12" width="12" height="96" />
+    <!-- Upper Diagonal Branch -->
+    <polygon points="44,44 76,12 84.5,20.5 44,61" />
+    <!-- Lower Diagonal Branch -->
+    <polygon points="44,72 70,46 78.5,54.5 44,89" />
+  </g>
+</svg>
