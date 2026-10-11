@@ -14,8 +14,8 @@ export default defineConfig(() => {
     build: {
       rollupOptions: {
         output: {
-          entryFileNames: 'assets/app.js',
-          chunkFileNames: 'assets/[name].js',
+          entryFileNames: 'assets/freya-v2.js',
+          chunkFileNames: 'assets/[name]-v2.js',
           assetFileNames: 'assets/[name].[ext]',
         },
       },
