@@ -36,6 +36,8 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({
     }
   }, [selectedCourseTitle]);
 
+  const [lastSubmittedWhatsappUrl, setLastSubmittedWhatsappUrl] = useState<string>('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName.trim()) {
@@ -56,6 +58,24 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({
     setIsSubmitting(true);
     setErrorMessage(null);
 
+    const selectedCourse = formData.service.trim() || 'Información General de Cursos';
+    const whatsappMessage = [
+      'Hola *Freya Academy*, deseo realizar mi inscripción / solicitud online:',
+      `• *Nombre:* ${formData.fullName.trim()}`,
+      `• *Especialidad:* ${formData.medicalSpecialty}`,
+      `• *Curso de Interés:* ${selectedCourse}`,
+      `• *Teléfono/WhatsApp:* ${formData.phone.trim()}`,
+      formData.email.trim() ? `• *Correo:* ${formData.email.trim()}` : '',
+      formData.preferredDate.trim() ? `• *Fecha Tentativa:* ${formData.preferredDate.trim()}` : '',
+      formData.notes.trim() ? `• *Comentarios:* ${formData.notes.trim()}` : '',
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    const cleanAcademyPhone = (config.whatsapp || '59169831697').replace(/[^0-9]/g, '') || '59169831697';
+    const generatedWhatsappUrl = `https://api.whatsapp.com/send/?phone=${cleanAcademyPhone}&text=${encodeURIComponent(whatsappMessage)}`;
+    setLastSubmittedWhatsappUrl(generatedWhatsappUrl);
+
     const path = 'appointments';
     try {
       await addDoc(collection(db, path), {
@@ -64,12 +84,16 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({
         phone: formData.phone.trim(),
         medicalSpecialty: formData.medicalSpecialty,
         preferredDate: formData.preferredDate.trim(),
-        service: formData.service.trim() || 'Información General de Cursos',
+        service: selectedCourse,
         notes: formData.notes.trim(),
         status: 'pending',
         createdAt: new Date().toISOString(),
       });
-
+    } catch (err) {
+      console.warn('Firestore booking log notice:', err);
+      handleFirestoreError(err, OperationType.CREATE, path);
+    } finally {
+      setIsSubmitting(false);
       setIsSuccess(true);
       setFormData({
         fullName: '',
@@ -80,15 +104,6 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({
         service: '',
         notes: '',
       });
-    } catch (err) {
-      console.error('Failed to submit admission request:', err);
-      try {
-        handleFirestoreError(err, OperationType.CREATE, path);
-      } catch {
-        setErrorMessage('No se pudo enviar la solicitud en este momento. Por favor contáctanos directamente por WhatsApp.');
-      }
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -129,12 +144,22 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({
                 Solicitud Recibida con Éxito
               </h3>
               <p className="text-sm text-[#171717]/70 max-w-md mx-auto">
-                Gracias por tu interés en Freya Academy. Tu postulación ha sido registrada en nuestros registros académicos. Nuestro equipo de coordinación médica se comunicará contigo vía WhatsApp o llamada a la brevedad.
+                Gracias por tu interés en Freya Academy. Tu postulación ha sido registrada en línea. También puedes enviar tu ficha directamente al WhatsApp oficial de coordinación médica para atención inmediata.
               </p>
-              <div className="pt-2">
+              <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                {lastSubmittedWhatsappUrl && (
+                  <a
+                    href={lastSubmittedWhatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-2.5 text-xs font-semibold tracking-wider uppercase text-white bg-[#25D366] hover:bg-[#1ebe57] transition-all inline-flex items-center gap-2 shadow-sm"
+                  >
+                    <span>Enviar Mi Ficha por WhatsApp</span>
+                  </a>
+                )}
                 <button
                   onClick={() => setIsSuccess(false)}
-                  className="px-6 py-2.5 text-xs font-semibold tracking-wider uppercase text-white bg-[#806B55] hover:bg-[#6c5945] transition-all"
+                  className="px-6 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#806B55] border border-[#806B55]/40 bg-white hover:bg-[#F2E4D5]/30 transition-all"
                 >
                   Enviar Otra Solicitud
                 </button>

@@ -248,24 +248,7 @@ export default function App() {
       {/* Footer */}
       <Footer
         config={config}
-        onOpenEditor={() => setIsEditorOpen(true)}
-      />
-
-      {/* Client Information Management Drawer */}
-      <ClientEditorDrawer
-        isOpen={isEditorOpen}
-        onClose={() => setIsEditorOpen(false)}
-        config={config}
-        services={services}
-        appointments={appointments}
-        user={user}
-        onSaveConfig={handleSaveConfig}
-        onAddService={handleAddService}
-        onDeleteService={handleDeleteService}
-        onUpdateAppointmentStatus={handleUpdateAppointmentStatus}
-        onLogin={loginWithGoogle}
-        onLogout={logoutUser}
-        isSaving={isSaving}
+        onOpenEditor={() => {}}
       />
 
       {/* Floating Real WhatsApp Action (Bottom Right) */}
@@ -273,43 +256,6 @@ export default function App() {
         whatsappUrl={config.whatsappUrl}
         phone={config.phone}
       />
-
-      {/* Floating Mode & Editor Control Bar (Bottom Left) */}
-      <div className="fixed bottom-6 left-6 z-30 flex items-center gap-2 bg-[#FFFFFF]/90 backdrop-blur-md p-1.5 border border-[#806B55]/25 shadow-lg">
-        <button
-          onClick={() => setIsEditMode(!isEditMode)}
-          className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors flex items-center gap-1.5 ${
-            isEditMode
-              ? 'bg-[#806B55] text-white'
-              : 'bg-[#FAF7F2] text-[#806B55] hover:bg-[#F2E4D5]'
-          }`}
-          title="Toggle editing hints and guidance"
-        >
-          {isEditMode ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-          <span>{isEditMode ? 'Editor Mode' : 'Clean Preview'}</span>
-        </button>
-
-        <button
-          onClick={() => setIsEditorOpen(true)}
-          className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#806B55] bg-white border border-[#806B55]/30 hover:border-[#806B55] transition-colors flex items-center gap-1.5"
-          title="Open Information Console"
-        >
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>Practice Data</span>
-        </button>
-
-        {import.meta.env.DEV && (
-          <a
-            href="/freya-academy-hostinger.zip"
-            download="freya-academy-hostinger.zip"
-            className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#9E6370] hover:bg-[#804A58] transition-colors flex items-center gap-1.5 shadow-sm"
-            title="Download Ready-to-Upload ZIP for Hostinger (public_html)"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Download Hostinger ZIP</span>
-          </a>
-        )}
-      </div>
 
     </div>
   );
