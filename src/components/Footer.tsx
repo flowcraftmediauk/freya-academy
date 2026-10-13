@@ -1,14 +1,15 @@
 import React from 'react';
 import { SiteConfig } from '../types';
-import { MapPin, Phone, Mail, Clock, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ExternalLink, Lock } from 'lucide-react';
 import { FreyaLogo } from './FreyaLogo';
 
 interface FooterProps {
   config: SiteConfig;
   onOpenEditor: () => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ config, onOpenEditor }) => {
+export const Footer: React.FC<FooterProps> = ({ config, onOpenEditor, onOpenAdmin }) => {
   const currentYear = new Date().getFullYear();
 
   const whatsappHref =
@@ -231,10 +232,23 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenEditor }) => {
           <p>
             &copy; {currentYear} Freya Academy. Formación Médica Real. Todos los derechos reservados.
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-[#806B55]">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] text-[#806B55]">
             <span>Exclusivo para Profesionales Médicos</span>
             <span>·</span>
             <span>Rigor Científico y Seguridad Clínica</span>
+            {onOpenAdmin && (
+              <>
+                <span>·</span>
+                <button
+                  onClick={onOpenAdmin}
+                  className="hover:text-[#171717] transition-colors inline-flex items-center gap-1 opacity-70 hover:opacity-100 cursor-pointer"
+                  title="Acceso Administrativo"
+                >
+                  <Lock className="w-3 h-3" />
+                  <span>Acceso Administrativo</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

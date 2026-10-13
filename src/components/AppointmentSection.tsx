@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SiteConfig, ServiceItem } from '../types';
 import { collection, addDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase';
+import { saveAppointmentToSupabase } from '../supabase';
 import { Calendar, CheckCircle2, Send, Clock, User, Mail, Phone, Stethoscope, Award, Sparkles } from 'lucide-react';
 
 interface AppointmentSectionProps {
@@ -76,6 +77,22 @@ export const AppointmentSection: React.FC<AppointmentSectionProps> = ({
     const generatedWhatsappUrl = `https://api.whatsapp.com/send/?phone=${cleanAcademyPhone}&text=${encodeURIComponent(whatsappMessage)}`;
     setLastSubmittedWhatsappUrl(generatedWhatsappUrl);
 
+    // 1. Save directly to Supabase
+    try {
+      await saveAppointmentToSupabase({
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        medicalSpecialty: formData.medicalSpecialty,
+        preferredDate: formData.preferredDate.trim(),
+        service: selectedCourse,
+        notes: formData.notes.trim(),
+      });
+    } catch (sbErr) {
+      console.warn('Supabase save notice:', sbErr);
+    }
+
+    // 2. Also save to Firestore as synchronized fallback
     const path = 'appointments';
     try {
       await addDoc(collection(db, path), {

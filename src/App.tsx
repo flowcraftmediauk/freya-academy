@@ -26,6 +26,7 @@ import { AppointmentSection } from './components/AppointmentSection';
 import { Footer } from './components/Footer';
 import { ClientEditorDrawer } from './components/ClientEditorDrawer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { AdminPanelModal } from './components/AdminPanelModal';
 import { SlidersHorizontal, Eye, EyeOff, Download } from 'lucide-react';
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [selectedCourseTitle, setSelectedCourseTitle] = useState<string>('');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [authReady, setAuthReady] = useState(false);
@@ -249,12 +251,20 @@ export default function App() {
       <Footer
         config={config}
         onOpenEditor={() => {}}
+        onOpenAdmin={() => setIsAdminOpen(true)}
       />
 
       {/* Floating Real WhatsApp Action (Bottom Right) */}
       <FloatingWhatsApp
         whatsappUrl={config.whatsappUrl}
         phone={config.phone}
+      />
+
+      {/* Protected Admin Portal Modal */}
+      <AdminPanelModal
+        isOpen={isAdminOpen}
+        onClose={() => setIsAdminOpen(false)}
+        firestoreAppointments={appointments}
       />
 
     </div>
